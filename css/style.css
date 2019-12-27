@@ -160,11 +160,23 @@ a{
 
 .header_right_mail{
     font-family: "openSans";
-    font-style: 300;
-    background-image: url(../img/header/back.jpg);
+    font-weight: 300;
     background-size: 100% 100%;
     padding: 0.7rem 1rem 1.5rem;
     text-align: center;
+    display: none;
+}
+
+.mL{
+    background-image: url(../img/header/back0.png);
+}
+
+.mC{
+    background-image: url(../img/header/back.png);
+}
+
+.mR{
+    background-image: url(../img/header/back1.png);
 }
 
 .header_right_social{
@@ -173,6 +185,9 @@ a{
 
 .header_right_social_item{
     text-decoration: none;
+    height: 100%;
+    margin-right: 5rem;
+    cursor: pointer;
 }
 
 .fas{
@@ -196,21 +211,29 @@ a{
     position: relative;
 
     height: 4.6rem;
-    padding: 1.7rem;
+/*    padding: 1.7rem;*/
     border-top: 0.1rem #eceef4 solid;
     border-bottom: 0.1rem #eceef4 solid;
 }
 
-/*nav_by_topics*/
+/*nav_by-topics*/
+.nav_by-topics{
+    height: 100%;
+}
+
 .nav_item{
+    display: inline-block;
     position: relative;
+    bottom: -0.4rem;
+
     text-decoration: none;
+
     padding: 1rem;
+    height: 100%;
 
     font-family: "openSans";
     font-size: 0.8rem;
     font-weight: 300;
-    height: 100%;
 }
 
 .nav_item:after{
@@ -227,15 +250,20 @@ a{
 }
 
 .nav_item:last-child:after {
-    background-color: #fff;
+    display: none;
 }
 
-.nav_item-active{
+.nav_item:hover{
+    color: #3182C1;
+}
+
+.nav_item_triagle{
     position: absolute;
     left: 50%;
-    bottom: -0.5rem;
+    bottom: 0.15rem;
     z-index: 1001;
-    transform: translate3d(-50%);
+    transform: translateX(-50%);
+    display: none;
 }
 
 /*nav_by_words*/
@@ -802,6 +830,7 @@ a{
 .footer_inp{
     border: none;
     outline: none;
+    font-family: inherit;
 
     width: 55%;
     padding: 0.33rem;
@@ -824,8 +853,8 @@ a{
     border: none;
     outline: none;
     font-family: inherit;
-    font-weight: 700;
 
+    font-weight: 700;
     color: inherit;
     background-color: #494c4d;
     padding: 1rem 1.5rem;
@@ -867,7 +896,11 @@ a{
 
 
 
-
+/*  *   *   *   */
+.active{
+    display: block;
+}
+/*  *   *   *   */
 
 
 
