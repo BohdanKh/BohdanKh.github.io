@@ -37,12 +37,12 @@ a{
     background-color: #eceef4;
     margin-bottom: 3.66rem;
 }
+
 /* left */
-
-
 .top-header_left{
     display: flex;
     flex-direction: row;
+
 }
 
 .top-header_btn{
@@ -75,6 +75,76 @@ a{
     width: 1rem;
     margin-right: 0.33rem;
 }
+
+/*drop-down list*/
+.sel{
+    position: relative;
+    width: 10.03rem;
+    height: 2.3rem;
+    background-color: #fff;
+    border: 0.066rem #000 solid;
+    margin-left: 0.333rem;
+}
+
+.sel_selected-item{
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+    padding-left: 0.4rem;
+}
+
+#sel_arrow{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    color: #000;
+    font-size: 1.333rem;
+    background-color: #BABBBD;
+    width: 2.13rem;
+    height: 2.13rem;
+    margin: 0;
+}
+
+
+.sel_dropping-list{
+    display: none;
+
+    position: absolute;
+    top: 2.31rem;
+    left: 0;
+
+    width: 9.9rem;
+    background-color: #fff;
+    border: 0.066rem #000 solid;
+}
+
+.sel_item{
+    display: flex;
+    align-items: center;
+    width: 9.75rem;
+
+    padding: 0.33rem 0.33rem;
+}
+
+.sel_item:hover{
+    background-color: #0ff;
+}
+
+.sel_item:active{
+    background-color: #0aa;
+}
+
+.sel_text{
+    margin-left: 0.5rem;
+}
+
 
 /* right */
 .top-header_right{
@@ -201,6 +271,10 @@ a{
     color: #0dd;
 }
 
+.fas:active{
+    color: #00c;
+}
+
 
 /***************************** nav  */
 .nav{
@@ -211,7 +285,7 @@ a{
     position: relative;
 
     height: 4.6rem;
-/*    padding: 1.7rem;*/
+    padding: 0;
     border-top: 0.1rem #eceef4 solid;
     border-bottom: 0.1rem #eceef4 solid;
 }
@@ -224,11 +298,11 @@ a{
 .nav_item{
     display: inline-block;
     position: relative;
-    bottom: -0.4rem;
+/*    bottom: -0.6rem;*/
 
     text-decoration: none;
 
-    padding: 1rem;
+    padding: 1.5rem 1rem;
     height: 100%;
 
     font-family: "openSans";
@@ -241,7 +315,7 @@ a{
     display: inline-block;
 
     position: absolute;
-    top: -0.8rem;
+    top: -0.1rem;
 
     width: 0.2rem;
     height: 4.5rem;
@@ -255,6 +329,11 @@ a{
 
 .nav_item:hover{
     color: #3182C1;
+}
+
+.nav_item:active{
+    color: #3182C1;
+    background-color: #eee;
 }
 
 .nav_item_triagle{
@@ -899,6 +978,10 @@ a{
 /*  *   *   *   */
 .active{
     display: block;
+}
+
+.rotate-180-degrees{
+    transform: rotate(180deg);
 }
 /*  *   *   *   */
 
