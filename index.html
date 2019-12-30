@@ -22,7 +22,6 @@
             <button class="top-header_btn"><img src="img/top_header/i1.png" class="top-header_icon"> Blog</button>
             <button class="top-header_btn"><img src="img/top_header/i2.png" class="top-header_icon"> Jobs</button>
             <button class="top-header_btn"><img src="img/top_header/i3.png" class="top-header_icon"> Support</button>
-            <button class="top-header_btn"><img src="img/top_header/i4.png" class="top-header_icon"> Arrabic</button>
 
 
 
@@ -46,13 +45,6 @@
                     </div>
                 </div>
             </div>
-<!--
-            <select class="top-header_list" data-img-src="img/top-header/i1.png">
-                <option value="EN">English</option>
-                <option value="UA">Ukrainian</option>
-                <option value="RU">Rassian</option>
-            </select>
--->
         </div>
 
         <div class="top-header_right">
@@ -95,7 +87,7 @@
             </div>
 
             <div class="header_right_social">
-                <i class="fas fa-phone-square-alt header_right_social_item" data-mail="0"></i>
+                <i class="fas fa-phone-square-alt header_right_social_item active" data-mail="0"></i>
 
                 <i class="fas fa-map-marker-alt header_right_social_item" data-mail="1"></i>
 
@@ -106,7 +98,11 @@
 
 <!--        navigation-->
     <div class="nav container">
-        <div class="nav_by-topics">
+        <div class="nav_burger" id="nav_burger">
+            <div class="layer"></div>
+        </div>
+
+        <div class="nav_by-topics" class="nav_by-topics">
             <a href="#" class="nav_item" data-navI="0">Home
                 <img class="nav_item_triagle" src="img/navigation/active.png">
             </a>
@@ -165,7 +161,7 @@
                 </div>
 
                 <button class="next">
-                    <i class="fas fa-chevron-circle-right"></i>
+                    <i class="fas fa-chevron-circle-right next_arrow"></i>
                 </button>
             </div>
         </div>
@@ -195,7 +191,7 @@
         <img src="img/whatWeDo/border.png" class="whatWeDo_border">
 
         <div class="whatWeDo_header">
-            <img src="img/whatWeDo/1.png">
+            <img src="img/whatWeDo/1.png" class="wharWeDo_header_img">
 
             <div class="whatWeDo_content">
                 <div class="whatWeDo_header_title">
@@ -415,7 +411,7 @@
 <!--    team-->
     <div class="team container">
         <div class="team_header">
-            <img src="img/team/icon.png" alt="^*^">
+            <img src="img/team/icon.png" alt="^*^" class="team_header_img">
 
             <div class="team_header_content">
                 <div class="team_header_title">Meet Our Team</div>
@@ -482,6 +478,7 @@
         <div class="contacts_inner container">
             <img class="contacts_marker" src="img/contacts/marker.png" alt="^|^">
 
+
             <div class="contacts_info">
                 <div class="contacts_notices">
                     <div class="contacts_notice">
@@ -501,7 +498,7 @@
                         <i class="contacts_i fas fa-envelope"></i>
                     </button>
                 </div>
-        </div>
+            </div>
         </div>
     </div>
 

@@ -3,10 +3,11 @@ window.onload = function(){
     let indexOfItem;
     let arrTriagle;
 
+    let navByTopics = document.getElementsByClassName("nav_by-topics")[0];
     // при наведенні мишки на блок навігації, відпрацьовує ф. 'addTriagle'
-    document.getElementsByClassName("nav")[0].addEventListener("mouseover", addTriagle);
+    navByTopics.addEventListener("mouseover", addTriagle);
     // мишка залишає блок навігації - відпрацьовує ф. 'removeTriagle'
-    document.getElementsByClassName("nav")[0].addEventListener("mouseout", remTriagle);
+    navByTopics.addEventListener("mouseout", remTriagle);
     //
 
 
@@ -39,12 +40,14 @@ window.onload = function(){
     }
 
     //приховує трикутник
-    function remTriagle(){
-        // отримуємо всі трикутнички в змінну-масив 'remTriagle'
-        arrTriagle = document.getElementsByClassName("nav_item_triagle");
+    function remTriagle(event){
+        if(event.target.className == "nav_item"){
+            // отримуємо всі трикутнички в змінну-масив 'remTriagle'
+            arrTriagle = document.getElementsByClassName("nav_item_triagle");
 
-        // видаляємо клас показу трикутника
-        arrTriagle[indexOfItem].classList.remove("active");// this short way cuse one time error during first transition mouse throught borders of 'nav' and nav_item, but it is does not effect on quality of work
+            // видаляємо клас показу трикутника
+            arrTriagle[indexOfItem].classList.remove("active");// this short way cuse one time error during first transition mouse throught borders of 'nav' and nav_item, but it is does not effect on quality of work
+        }
     }
 
     //показує трикутник
@@ -55,7 +58,7 @@ window.onload = function(){
 
 
 /////////////////////// header social
-    // при клікі на елменті з контактами, спрацьовує анонімна функція
+    // при клікі на елмент зі списком контактів, спрацьовує анонімна функція
     document.querySelector(".header_right_social").onclick = function(event){
         // функція буде працювати тільки при кліці на іконки
         if(event.target.tagName == "I"){
@@ -65,13 +68,13 @@ window.onload = function(){
             // отримуємо масив хмаринок
             let arrMail = document.querySelectorAll(".header_right_mail");
 
-            // до відповідної іконки підбираєм хмаринку з індексом такимб як у іконки дані атрибута 'data-mail'
+            // до відповідної іконки підбираєм хмаринку з індексом таким, як у іконки дані атрибута 'data-mail'
             for(let i=0; i<arrMail.length; ++i){
                 if(i == numItem){
-                    arrMail[i].style.display = "block";
+                    arrMail[i].classList.add("active");
                 }
                 else{
-                    arrMail[i].style.display = "none";
+                    arrMail[i].classList.remove("active");
                 }
             }
         }
@@ -126,6 +129,49 @@ window.onload = function(){
     }
     // баг #1: при виділенні декількох елементів  неаадекватно себе поводить
 
+
+
+/////////////////////// burger
+    let burger = document.querySelector("#nav_burger");
+    let counterNav = 0;
+
+    burger.addEventListener("click", function(){
+        if(counterNav%2 == 0){
+            navByTopics.classList.add("active-flex");
+            counterNav++;
+        }
+        else if(counterNav%2 == 1){
+            navByTopics.classList.remove("active-flex");
+            counterNav++;
+        }
+    });
+
+    navByTopics.addEventListener("click",function(){
+        navByTopics.classList.remove("active-flex");
+    });
+
+
+
+/////////////////////// nav scroll
+    let nav = document.getElementsByClassName("nav")[0];
+
+    let box = nav.getBoundingClientRect();
+    let navAbsoluteTopCord = pageYOffset + box.y;
+    let navAbsoluteBottomCord = navAbsoluteTopCord + nav.offsetHeight;
+
+    window.addEventListener("scroll", toggleFixed);
+    window.onload = toggleFixed();
+
+
+    function toggleFixed(){
+        if(pageYOffset >= navAbsoluteBottomCord){
+            nav.classList.add("position-fixed");
+
+        }
+        else if(pageYOffset <= navAbsoluteBottomCord){
+            nav.classList.remove("position-fixed");
+        }
+    }
 }
 
 
