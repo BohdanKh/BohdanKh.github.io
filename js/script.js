@@ -132,10 +132,15 @@ window.onload = function(){
 
 
 /////////////////////// burger
+    // отримуємо значок бургер меню
     let burger = document.querySelector("#nav_burger");
+    // лічильник для двох станів навігації
     let counterNav = 0;
 
+    // при клікі на бургер меню ...
     burger.addEventListener("click", function(){
+        // якщо лічильник парний, то показуємо навігацію та робимо лічильник непарним
+        // якщо непарний, то ховаємо навігацію та робимо лячильник парним
         if(counterNav%2 == 0){
             navByTopics.classList.add("active-flex");
             counterNav++;
@@ -146,32 +151,189 @@ window.onload = function(){
         }
     });
 
+    // при кліці на будь яке місце навігації, вона приховується, а лічильник стає парним
     navByTopics.addEventListener("click",function(){
         navByTopics.classList.remove("active-flex");
+        counterNav++;
     });
 
 
 
-/////////////////////// nav scroll
+/////////////////////// nav fixed
     let nav = document.getElementsByClassName("nav")[0];
 
+    // отримуємо метод об'єкта для отримання позиці відносно початку вікна перегляду
     let box = nav.getBoundingClientRect();
+    // отримуємо кординати верхньої частини блока навігації відносно проекта
     let navAbsoluteTopCord = pageYOffset + box.y;
+    // отримуємо кординати нижноЇ частини блока надавігації відносно проекта
     let navAbsoluteBottomCord = navAbsoluteTopCord + nav.offsetHeight;
 
+    // при скролі і перезавантаженні сторінки викликаємо функцію 'toggleFixed'
     window.addEventListener("scroll", toggleFixed);
     window.onload = toggleFixed();
 
-
+    // якщо вікно прокручене далі нижньої границі блока навігаціїб то позиціонуємо навігацію відносно вікна браузера; якщо вище, то позиціонуюмо відносно проекта
     function toggleFixed(){
         if(pageYOffset >= navAbsoluteBottomCord){
             nav.classList.add("position-fixed");
-
         }
         else if(pageYOffset <= navAbsoluteBottomCord){
             nav.classList.remove("position-fixed");
         }
     }
+
+
+
+/////////////////////// nav scroll to ...
+    // при клаці на блок з навігацією визветься функція 'scrollTo'
+    navByTopics.addEventListener("click", scrollTo);
+
+    function scrollTo(event){
+        event.preventDefault();
+        // цікавлять тільки кліки на кнопки
+        if(event.target.className == "nav_item" || avent.target.className == "nav_item_triagle"){
+            // отримуємо  ідентифікатори елемента до якого потрібно скролить
+            let idOfScroll = event.target.getAttribute("data-scroll");
+            // ініціалізуємо змінну елементом до якого потрібно скролить
+            let elementOfScroll = document.getElementById(idOfScroll);
+
+            // отримуємо кординати початку елемента скрола
+            let yOfScroll = elementOfScroll.getBoundingClientRect().y + pageYOffset;
+            // для кращоЇ видимості елемента після скролу
+            yOfScroll -= 100;
+
+            //скролим
+            window.scrollTo(0, yOfScroll);
+        }
+    }
+
+
+
+/////////////////////// intro slider ...
+    // отримуємо кнопку перемикання слайдів
+    let btnToLeft = document.querySelector(".next");
+    let btnToTop = document.querySelector(".next");
+    // отримуємо полосу прокрутки
+    let polosa = document.querySelector(".slider_polosa");
+    // ініціалізуємо масив із слайдів
+    let arrSliderItems = document.querySelectorAll(".slider_item");
+    // для визначення скролу зараз
+    let sliderCurrentScroll = 0;
+    // для визначення, коли потрібно повернутись на початок(таким чином ми створюємо безкінечний слайдер)
+    let sliderBreakPoint = 0;
+
+    //визначаємо, чи слайдер є горизонтальний, чи вертикальний
+    if(window.screen.availWidth > 870){
+        //задаємо значення відката до першого слайда(кінця слайдера)
+        sliderBreakPoint = (arrSliderItems.length - 1) * (-328);
+
+        // при кліці на кнопку ...
+        btnToLeft.onclick = function(){
+            // зменшуємо правий відступ (вдовблюємо далі в мінус)
+            sliderCurrentScroll -= 328;
+
+            // коли доходимо кінеця слайдера, скролимо до першого слайда
+            if(sliderCurrentScroll <= sliderBreakPoint){
+                sliderCurrentScroll = 0;
+            }
+
+            // за допомогою зміни правого відступа полоси прокрутки реалізовуємо все те, що я описав в цій функції
+            polosa.style.right = sliderCurrentScroll + "px";
+        }
+    }
+    else if(window.screen.availWidth <= 870){
+        sliderBreakPoint = (arrSliderItems.length - 1) * -245;
+
+        btnToTop.onclick = function(){
+            sliderCurrentScroll -= 245;
+
+            if(sliderCurrentScroll <= sliderBreakPoint){
+                sliderCurrentScroll = 0;
+            }
+
+            polosa.style.bottom = sliderCurrentScroll + "px";
+        }
+    }
+
+
+
+/////////////////////// projects sorting
+    // при клікі на навігацію сортування спрацбовує функція 'sortProject'
+    document.getElementsByClassName("projects_nav")[0].addEventListener("click", sortProjects);
+
+    // отримуємо масив постерів проектів
+    let arrProjects = document.getElementsByClassName("projects_card");
+
+    function sortProjects(event){
+        // якщо клікнули по кнопці
+        if(event.target.className == "projects_nav_item"){
+            // первіряємо, чи ми сортуємо за категоріями, ідентичністю, чи просто показуємо всі проекти
+            if(event.target.hasAttribute("data-cat")){
+                toggleProjects("data-cat", event.target.getAttribute("data-cat"));
+            }
+            else if(event.target.hasAttribute("data-identities")){
+                toggleProjects("data-identities", event.target.getAttribute("data-identities"));
+            }
+            else{
+                showAllProjects();
+            }
+        }
+    }
+
+    function toggleProjects(nameAttribute, dataAttribute){
+        // превряємо весь масив проектів
+        for(let i=0; i < arrProjects.length; ++i){
+            //якщо дані атрибута проекта збігається з даними атрибута кнопки, то показуюмо проект; якщо ны - ховаємо
+            if(arrProjects[i].getAttribute(nameAttribute) == dataAttribute){
+                arrProjects[i].style.display = "block";
+
+            }
+            else if(arrProjects[i].getAttribute(nameAttribute) != dataAttribute){
+                arrProjects[i].style.display = "none";
+            }
+        }
+    }
+
+    function showAllProjects(){
+        for(let i=0; i<arrProjects.length; ++i){
+            arrProjects[i].style.display = "block";
+        }
+    }
+
+
+
+/////////////////////// projects scroll up
+    document.getElementById("projects_up").onclick = function(){
+        window.scrollTo(0,0);
+    }
+
+
+
+/////////////////////// contacts
+    // ініціалізуємо масив повідомленнями
+    let arrContactsInfo = document.getElementsByClassName("contacts_notice");
+
+    // при кліці на блок навігації визвеці ця анонімна функція
+    document.querySelector(".contacts_items").addEventListener("click", function(event){
+        //цікавить клік по кнопкам
+        if(event.target.className == "contacts_item" || event.target.tagName == "I"){
+
+            // номер кнопки або іконки по якій клікнули
+            let numberOfButton = event.target.getAttribute("data-notice");
+
+            // цикл перебирає масив з повідомленнямиб якщо номер кнопки по якій клацнули співпадає з індексом повідомлення, то це показуємо повідомлення, а якщо ні приховуємо
+            for(let i=0; i < arrContactsInfo.length; i++){
+                if(i == numberOfButton){
+                    arrContactsInfo[i].classList.add("active");
+                }
+                else{
+                    arrContactsInfo[i].classList.remove("active");
+                }
+            }
+        }
+    })
+
 }
 
 

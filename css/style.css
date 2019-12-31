@@ -412,15 +412,28 @@ a{
     bottom: 4rem;
     z-index: 1;
 
-    display: flex;
+
 
 /*    margin-right: 0rem;*/
     border: 0.075rem solid #000;
-    background-color: #ECEEF4;
+    overflow: hidden;
+    width: 51.2rem;
+    height: 16.6rem;
 }
 
 .slider_inner{
+    position: relative;
+    width: 43.8rem;
+}
+
+.slider_polosa{
     display: flex;
+
+    background-color: #ECEEF4;
+    transition: right 0.2s linear;
+
+    position: absolute;
+    right: 0;
 }
 
 .slider_item{
@@ -473,7 +486,19 @@ a{
 .next{
     border: none;
     width: 7.3rem;
+    height: 100%;
     transform: rotate(180deg);
+
+    float: right;
+    position: relative;
+    z-index: 10;
+
+
+}
+
+
+.next:hover i{
+    color: #00f;
 }
 
 
@@ -809,7 +834,6 @@ a{
 
 /*notices*/
 .contacts_notice{
-    background-image: url(../img/contacts/notice.png);
     background-size: 100% 100%;
     padding: 1rem 1rem 2rem;
     text-align: center;
@@ -828,7 +852,12 @@ a{
     text-align: center;
 }
 
+.contacts_notice{
+    display: none;
+}
+
 .contacts_item{
+    display: inline-block;
     outline: none;
 
     margin: 1rem;
@@ -1083,28 +1112,32 @@ a{
     }
 
     .slider{
+        display: flex;
         flex-direction: column;
-        right: 50%;
-        transform: translateX(50%);
+        height: 36.6rem;
+        width: 21.7rem;
     }
 
     .slider_inner{
-        flex-direction: column;
-    }
-
-    .slider_item{
-        margin-right: 0;
-        height: 241px;
-        border: none;
-        border-top: 0.06rem #000 solid;
-    }
-
-    .slider_img{
+        float: none;
         height: 100%;
     }
 
+    .slider_polosa{
+        flex-direction: column;
+        left: 0;
+        bottom: 0;
+        transition: bottom 0.2s linear;
+    }
+
+    .pocket{
+        width: 21.5rem;
+    }
+
+
     .next{
         width: 100%;
+        height: auto;
         padding: 0.5rem 0;
         border-bottom: 0.06rem #000 solid;
     }
