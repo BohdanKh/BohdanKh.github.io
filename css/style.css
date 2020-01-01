@@ -290,6 +290,7 @@ a{
     padding: 0;
     border-top: 0.2rem #777 solid;
     border-bottom: 0.2rem #777 solid;
+    margin: 0 auto;
 }
 
 /*nav_by-topics*/
@@ -816,20 +817,12 @@ a{
 .contacts{
     background-image: url(../img/contacts/map.jpg);
     background-size: cover;
-    height: 33.3rem;
+    height: 13.3rem;
 }
 
 .contacts_inner{
     position: relative;
     height: 100%;
-}
-
-/*marker*/
-.contacts_marker{
-    position: absolute;
-    left: 65%;
-    top: 20%;
-    z-index: 1;
 }
 
 /*notices*/
@@ -845,7 +838,7 @@ a{
 .contacts_info{
     position: absolute;
     left: 50%;
-    bottom: 4.6rem;
+    bottom: 0.5rem;
     z-index: 2;
     transform: translateX(-50%);
 
@@ -1300,9 +1293,6 @@ a{
     }
 
 /*    contacts*/
-    .contacts_marker{
-        width: 4rem;
-    }
 
      .contacts_info{
         bottom: 0.5rem;
@@ -1382,12 +1372,6 @@ a{
 /*    team*/
     .member{
         width: 70%;
-    }
-
-
-/*    contacts*/
-    .contacts_marker{
-        width: 3rem;
     }
 
 
@@ -1516,9 +1500,10 @@ a{
 
 .position-fixed{
     position: fixed;
-    left: 0;
+    left: 50%;
     top: 0;
     z-index: 1000;
+    transform: translateX(-50%);
 
     box-shadow: 0 0 1rem 0.5rem #000;
 }
